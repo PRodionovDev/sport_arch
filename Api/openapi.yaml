@@ -286,6 +286,7 @@ components:
     Equipment:
       required:
         - name
+        - type
       type: object
       properties:
         id:
@@ -294,10 +295,16 @@ components:
           example: 10
         name:
           type: string
-          example: Шкаф
+          example: Штанга NamePro-5
+        type:
+          type: string
+          example: Штанги
     Map:
       required:
         - name
+        - longitude
+        - latitude
+        - type
       type: object
       properties:
         id:
@@ -306,10 +313,22 @@ components:
           example: 10
         name:
           type: string
-          example: Шкаф
+          example: Спортклуб "Медведь"
+        longitude:
+          type: number
+          example: 55.755864
+        latitude:
+          type: number
+          example: 37.617698
+        type:
+          type: string
+          example: Спортивные клубы
     Competition:
       required:
         - name
+        - format
+        - type
+        - date
       type: object
       properties:
         id:
@@ -318,10 +337,23 @@ components:
           example: 10
         name:
           type: string
-          example: Шкаф
+          example: Забег 2025
+        format:
+          type: string
+          example: offline
+        type:
+          type: string
+          example: Марафон
+        date:
+          type: string
+          example: 2025-01-01 07:00:00
+        address:
+          type: string
+          example: г. новосибирск, ул. Ленина, 1
     Training:
       required:
         - name
+        - description
       type: object
       properties:
         id:
@@ -330,7 +362,10 @@ components:
           example: 10
         name:
           type: string
-          example: Шкаф
+          example: программа "Эффективное похудение"
+        description:
+          type: string
+          example: Каждое утро и вечер...
     User:
       required:
         - name
@@ -340,19 +375,15 @@ components:
           type: integer
           format: int64
           example: 10
+        login:
+          type: string
+          example: ivanov@ivan.ivanovich
         name:
           type: string
-          example: Шкаф
-    ApiResponseSuccess:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          example: 200
-        message:
-          type: string
-          example: 'Success'
+          example: Иванов Иван Иванович
+        sex:
+          type: boolean
+          example: true
     ApiResponseNotFound:
       type: object
       properties:
