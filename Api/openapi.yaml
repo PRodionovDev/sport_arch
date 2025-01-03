@@ -1,0 +1,365 @@
+openapi: 3.0.3
+info:
+  title: API. Дипломная работа - OpenAPI 3.0
+  version: 1.0.0
+servers:
+  - url: https://localhost/api/v1
+tags:
+  - name: equipment
+    description: Инвентарь
+  - name: map
+    description: Карта
+  - name: competition
+    description: Соревнования
+  - name: training
+    description: Тренировки
+  - name: user
+    description: Пользователи
+paths:
+  /equipment:
+    get:
+      tags:
+        - equipment
+      summary: Получение списка товаров
+      description: Получение списка товаров
+      operationId: getEquipment
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+        '404':
+          description: Products Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {
+                  type: string
+                }
+                example: []
+  /equipment/{equipmentId}:
+    get:
+      tags:
+        - equipment
+      summary: Получение товара
+      description: Получение товара по ID
+      operationId: getEquipmentById
+      parameters:
+        - name: equipmentId
+          in: path
+          description: ID товара
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseNotFound'
+  /map/{longitude}/{latitude}/{radius}:
+    get:
+      tags:
+        - map
+      summary: Получение точек для карты по координатам и радиусу
+      description: Получение точек для карты по координатам и радиусу
+      operationId: getMap
+      parameters:
+        - name: longitude
+          in: path
+          description: Долгота
+          required: true
+          schema:
+            type: integer
+            format: float
+        - name: latitude
+          in: path
+          description: Широта
+          required: true
+          schema:
+            type: integer
+            format: float
+        - name: radius
+          in: path
+          description: Радиус
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Map'
+        '404':
+          description: Points Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {
+                  type: string
+                }
+                example: [ ]
+  /competition:
+    get:
+      tags:
+        - competition
+      summary: Получение списка соревнований
+      description: Получение списка соревнований
+      operationId: getCompetition
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Competition'
+        '404':
+          description: Competition Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {
+                  type: string
+                }
+                example: [ ]
+  /competition/{competitionId}:
+    get:
+      tags:
+        - competition
+      summary: Получение соревнования
+      description: Получение соревнования по ID
+      operationId: getCompetitionById
+      parameters:
+        - name: competitionId
+          in: path
+          description: ID соревнования
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Competition'
+        '404':
+          description: Competition not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseNotFound'
+  /training:
+    get:
+      tags:
+        - training
+      summary: Получение списка тренировок
+      description: Получение списка тренировок
+      operationId: getTraining
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Training'
+        '404':
+          description: Training Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {
+                  type: string
+                }
+                example: [ ]
+  /training/{trainingId}:
+    get:
+      tags:
+        - training
+      summary: Получение тренировки
+      description: Получение тренировки по ID
+      operationId: getTrainingById
+      parameters:
+        - name: trainingId
+          in: path
+          description: ID тренировки
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+        '404':
+          description: Training not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseNotFound'
+  /user:
+    get:
+      tags:
+        - user
+      summary: Получение списка пользователей
+      description: Получение списка пользователей
+      operationId: getUser
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: Users Not Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {
+                  type: string
+                }
+                example: [ ]
+  /user/{userId}:
+    get:
+      tags:
+        - user
+      summary: Получение пользователя
+      description: Получение пользователя по ID
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: ID пользователя
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseNotFound'
+
+components:
+  schemas:
+    Equipment:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Шкаф
+    Map:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Шкаф
+    Competition:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Шкаф
+    Training:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Шкаф
+    User:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Шкаф
+    ApiResponseSuccess:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 200
+        message:
+          type: string
+          example: 'Success'
+    ApiResponseNotFound:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 404
+        message:
+          type: string
+          example: 'Not Found'
